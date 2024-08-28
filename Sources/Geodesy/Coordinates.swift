@@ -2,7 +2,9 @@ import Foundation
 
 /// A pair of geographical coordinates on Earth.
 public struct Coordinates: Codable, Hashable, CustomStringConvertible {
+    /// The latitude coordinate in degrees.
     public var latitude: Degrees
+    /// The longitude coordinate in degrees.
     public var longitude: Degrees
     
     /// North or south.

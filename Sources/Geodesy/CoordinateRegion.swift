@@ -1,4 +1,4 @@
-struct Region: Codable, Hashable {
+struct CoordinateRegion: Codable, Hashable {
     let topLeft: Coordinates
     let bottomRight: Coordinates
     

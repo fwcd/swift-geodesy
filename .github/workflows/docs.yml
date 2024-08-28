@@ -26,7 +26,9 @@ jobs:
     - name: Set up Pages
       uses: actions/configure-pages@v5
     - name: Set up Swift
-      uses: swift-actions/setup-swift@v2
+    # Workaround for https://github.com/swift-actions/setup-swift/issues/591
+    # Use swift-actions/setup-swift@v2 again once fixed
+      uses: redsun82/setup-swift@b2b6f77ab14f6a9b136b520dc53ec8eca27d2b99
       with:
         swift-version: '5.10'
     - name: Generate Docs

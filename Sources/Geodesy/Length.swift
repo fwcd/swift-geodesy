@@ -1,3 +1,4 @@
+/// A physical length.
 public struct Length: AdditiveArithmetic, Hashable, Comparable, Codable, CustomStringConvertible, Sendable {
     public static var zero = Length()
     

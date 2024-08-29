@@ -1,5 +1,5 @@
 /// One of the four main compass directions.
-public enum Cardinal: String, Codable, Hashable, CustomStringConvertible {
+public enum Cardinal: String, Codable, Hashable, CustomStringConvertible, Sendable {
     case north = "N"
     case west = "W"
     case south = "S"

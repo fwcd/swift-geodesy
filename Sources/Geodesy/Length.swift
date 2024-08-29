@@ -1,4 +1,4 @@
-public struct Length: AdditiveArithmetic, Hashable, Comparable, Codable, CustomStringConvertible {
+public struct Length: AdditiveArithmetic, Hashable, Comparable, Codable, CustomStringConvertible, Sendable {
     public static var zero = Length()
     
     public var meters: Double

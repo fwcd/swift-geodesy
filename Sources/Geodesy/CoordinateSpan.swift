@@ -1,5 +1,5 @@
 /// An unpositioned rectangular geographical size.
-public struct CoordinateSpan: Hashable, Codable, AdditiveArithmetic {
+public struct CoordinateSpan: Hashable, Codable, AdditiveArithmetic, Sendable {
     public static let zero = Self(latitudeDelta: .zero, longitudeDelta: .zero)
 
     /// The height of the region in degrees.

@@ -1,5 +1,5 @@
 /// A positioned rectangular geographical region.
-public struct CoordinateRegion: Hashable, Codable {
+public struct CoordinateRegion: Hashable, Codable, Sendable {
     /// The coordinates of the region's center.
     public let center: Coordinates
     /// The size of the region.

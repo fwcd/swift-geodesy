@@ -8,7 +8,7 @@ public struct CoordinateRegion: Hashable, Codable, Sendable {
     /// The top left corner of the region.
     public var topLeft: Coordinates {
         Coordinates(
-            latitude: center.latitude - span.latitudeDelta / 2,
+            latitude: center.latitude + span.latitudeDelta / 2,
             longitude: center.longitude - span.longitudeDelta / 2
         )
     }
@@ -16,7 +16,7 @@ public struct CoordinateRegion: Hashable, Codable, Sendable {
     /// The bottom right corner of the region.
     public var bottomRight: Coordinates {
         Coordinates(
-            latitude: center.latitude + span.latitudeDelta / 2,
+            latitude: center.latitude - span.latitudeDelta / 2,
             longitude: center.longitude + span.longitudeDelta / 2
         )
     }

@@ -10,7 +10,7 @@ extension Coordinates {
         CLLocation(latitude: latitude.totalDegrees, longitude: longitude.totalDegrees)
     }
 
-    public init(from clCoordinate: CLLocationCoordinate2D) {
+    public init(_ clCoordinate: CLLocationCoordinate2D) {
         self.init(latitude: clCoordinate.latitude, longitude: clCoordinate.longitude)
     }
 

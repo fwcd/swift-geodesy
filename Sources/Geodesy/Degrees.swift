@@ -1,6 +1,6 @@
 /// An angle in degrees.
 public struct Degrees: AdditiveArithmetic, Hashable, Comparable, Codable, CustomStringConvertible, Sendable {
-    public static var zero = Degrees()
+    public static let zero = Degrees()
     
     // Decimal degrees (internal representation)
     public var totalDegrees: Double

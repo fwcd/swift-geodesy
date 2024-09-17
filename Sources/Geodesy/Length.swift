@@ -1,6 +1,6 @@
 /// A physical length.
 public struct Length: AdditiveArithmetic, Hashable, Comparable, Codable, CustomStringConvertible, Sendable {
-    public static var zero = Length()
+    public static let zero = Length()
     
     public var meters: Double
     public var description: String {

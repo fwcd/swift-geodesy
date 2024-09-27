@@ -37,6 +37,11 @@ public struct CoordinateRegion: Hashable, Codable, Sendable {
         )
     }
 
+    public init(center: Coordinates, span: CoordinateSpan) {
+        self.center = center
+        self.span = span
+    }
+
     public func contains(_ location: Coordinates) -> Bool {
         // TODO: This naive version may fail where coordinates wrap around
         (min(topLeft.latitude, bottomRight.latitude)...max(topLeft.latitude, bottomRight.latitude)).contains(location.latitude)

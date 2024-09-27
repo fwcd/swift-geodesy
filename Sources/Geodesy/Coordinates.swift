@@ -1,7 +1,10 @@
 import Foundation
 
 /// A pair of geographical coordinates on Earth.
-public struct Coordinates: Codable, Hashable, CustomStringConvertible, Sendable {
+public struct Coordinates: AdditiveArithmetic, Codable, Hashable, CustomStringConvertible, Sendable {
+    /// Null island.
+    public static let zero = Coordinates(latitude: 0, longitude: 0)
+
     /// The latitude coordinate in degrees.
     public var latitude: Degrees
     /// The longitude coordinate in degrees.
@@ -41,5 +44,40 @@ public struct Coordinates: Codable, Hashable, CustomStringConvertible, Sendable 
         let y = sin(dLon) * cos(lat2)
         let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon)
         return Degrees(radians: atan2(y, x))
+    }
+
+    public static func +(lhs: Self, rhs: Self) -> Self {
+        Self(
+            latitude: lhs.latitude + rhs.latitude,
+            longitude: lhs.longitude + rhs.longitude
+        )
+    }
+
+    public static func -(lhs: Self, rhs: Self) -> Self {
+        Self(
+            latitude: lhs.latitude - rhs.latitude,
+            longitude: lhs.longitude - rhs.longitude
+        )
+    }
+
+    public static func *(lhs: Self, rhs: Double) -> Self {
+        Self(
+            latitude: lhs.latitude * rhs,
+            longitude: lhs.longitude * rhs
+        )
+    }
+
+    public static func *(lhs: Double, rhs: Self) -> Self {
+        Self(
+            latitude: lhs * rhs.latitude,
+            longitude: lhs * rhs.longitude
+        )
+    }
+
+    public static func /(lhs: Self, rhs: Double) -> Self {
+        Self(
+            latitude: lhs.latitude / rhs,
+            longitude: lhs.longitude / rhs
+        )
     }
 }

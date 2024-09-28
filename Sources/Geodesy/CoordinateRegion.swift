@@ -1,50 +1,72 @@
 /// A positioned rectangular geographical region.
 public struct CoordinateRegion: Hashable, Codable, Sendable {
     /// The coordinates of the region's center.
-    public let center: Coordinates
+    public var center: Coordinates
     /// The size of the region.
-    public let span: CoordinateSpan
+    public var span: CoordinateSpan
 
     /// The top left corner of the region.
     public var topLeft: Coordinates {
-        Coordinates(
-            latitude: center.latitude + span.latitudeDelta / 2,
-            longitude: center.longitude - span.longitudeDelta / 2
-        )
+        get {
+            Coordinates(
+                latitude: center.latitude + span.latitudeDelta / 2,
+                longitude: center.longitude - span.longitudeDelta / 2
+            )
+        }
+        set {
+            self = Self(topLeft: newValue, bottomRight: bottomRight)
+        }
     }
 
     /// The bottom right corner of the region.
     public var bottomRight: Coordinates {
-        Coordinates(
-            latitude: center.latitude - span.latitudeDelta / 2,
-            longitude: center.longitude + span.longitudeDelta / 2
-        )
+        get {
+            Coordinates(
+                latitude: center.latitude - span.latitudeDelta / 2,
+                longitude: center.longitude + span.longitudeDelta / 2
+            )
+        }
+        set {
+            self = Self(topLeft: topLeft, bottomRight: newValue)
+        }
     }
 
     /// The bottom left (min) corner of the region.
     public var bottomLeft: Coordinates {
-        Coordinates(
-            latitude: bottomRight.latitude,
-            longitude: topLeft.longitude
-        )
+        get {
+            Coordinates(
+                latitude: bottomRight.latitude,
+                longitude: topLeft.longitude
+            )
+        }
+        set {
+            self = Self(bottomLeft: newValue, topRight: topRight)
+        }
     }
     
     /// The top right (max) corner of the region.
     public var topRight: Coordinates {
-        Coordinates(
-            latitude: topLeft.latitude,
-            longitude: bottomRight.longitude
-        )
+        get {
+            Coordinates(
+                latitude: topLeft.latitude,
+                longitude: bottomRight.longitude
+            )
+        }
+        set {
+            self = Self(bottomLeft: bottomLeft, topRight: newValue)
+        }
     }
 
     /// The bottom left (min) corner of the region.
     public var minCorner: Coordinates {
-        bottomLeft
+        get { bottomLeft }
+        set { bottomLeft = newValue }
     }
 
     /// The top right (max) corner of the region.
     public var maxCorner: Coordinates {
-        topRight
+        get { topRight }
+        set { topRight = newValue }
     }
 
     public init(center: Coordinates, span: CoordinateSpan) {

@@ -9,5 +9,9 @@ class CoordinateRegionTests: XCTestCase {
 
         assertApproxEquals(region.topLeft, topLeft)
         assertApproxEquals(region.bottomRight, bottomRight)
+
+        let region2 = CoordinateRegion(minCorner: region.minCorner, maxCorner: region.maxCorner)
+        assertApproxEquals(region.minCorner, region2.minCorner)
+        assertApproxEquals(region.maxCorner, region2.maxCorner)
     }
 }

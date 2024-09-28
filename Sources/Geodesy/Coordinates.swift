@@ -46,38 +46,45 @@ public struct Coordinates: AdditiveArithmetic, Codable, Hashable, CustomStringCo
         return Degrees(radians: atan2(y, x))
     }
 
-    public static func +(lhs: Self, rhs: Self) -> Self {
+    public func map(_ transform: (Degrees) -> Degrees) -> Self {
         Self(
-            latitude: lhs.latitude + rhs.latitude,
-            longitude: lhs.longitude + rhs.longitude
+            latitude: transform(latitude),
+            longitude: transform(longitude)
         )
+    }
+
+    public func zip(_ rhs: Self, with combiner: (Degrees, Degrees) -> Degrees) -> Self {
+        Self(
+            latitude: combiner(latitude, rhs.latitude),
+            longitude: combiner(longitude, rhs.longitude)
+        )
+    }
+
+    public func min(_ rhs: Self) -> Self {
+        zip(rhs, with: Swift.min)
+    }
+
+    public func max(_ rhs: Self) -> Self {
+        zip(rhs, with: Swift.max)
+    }
+
+    public static func +(lhs: Self, rhs: Self) -> Self {
+        lhs.zip(rhs, with: +)
     }
 
     public static func -(lhs: Self, rhs: Self) -> Self {
-        Self(
-            latitude: lhs.latitude - rhs.latitude,
-            longitude: lhs.longitude - rhs.longitude
-        )
+        lhs.zip(rhs, with: -)
     }
 
     public static func *(lhs: Self, rhs: Double) -> Self {
-        Self(
-            latitude: lhs.latitude * rhs,
-            longitude: lhs.longitude * rhs
-        )
+        lhs.map { $0 * rhs }
     }
 
     public static func *(lhs: Double, rhs: Self) -> Self {
-        Self(
-            latitude: lhs * rhs.latitude,
-            longitude: lhs * rhs.longitude
-        )
+        rhs.map { lhs * $0 }
     }
 
     public static func /(lhs: Self, rhs: Double) -> Self {
-        Self(
-            latitude: lhs.latitude / rhs,
-            longitude: lhs.longitude / rhs
-        )
+        lhs.map { $0 / rhs }
     }
 }

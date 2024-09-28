@@ -20,20 +20,20 @@ public struct CoordinateRegion: Hashable, Codable, Sendable {
             longitude: center.longitude + span.longitudeDelta / 2
         )
     }
-    
-    /// The top right (max) corner of the region.
-    public var topRight: Coordinates {
-        Coordinates(
-            latitude: topLeft.latitude,
-            longitude: bottomRight.longitude
-        )
-    }
 
     /// The bottom left (min) corner of the region.
     public var bottomLeft: Coordinates {
         Coordinates(
             latitude: bottomRight.latitude,
             longitude: topLeft.longitude
+        )
+    }
+    
+    /// The top right (max) corner of the region.
+    public var topRight: Coordinates {
+        Coordinates(
+            latitude: topLeft.latitude,
+            longitude: bottomRight.longitude
         )
     }
 

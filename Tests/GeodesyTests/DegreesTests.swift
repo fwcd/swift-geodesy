@@ -1,8 +1,6 @@
 import XCTest
 @testable import Geodesy
 
-private let eps = 0.01
-
 class DegreesTests: XCTestCase {
     func testDegrees() {
         var d = Degrees(degrees: 23, minutes: 3, seconds: 5)

@@ -62,6 +62,20 @@ public struct CoordinateRegion: Hashable, Codable, Sendable {
         )
     }
 
+    public init(bottomLeft: Coordinates, topRight: Coordinates) {
+        self.init(
+            center: (bottomLeft + topRight) / 2,
+            span: .init(
+                latitudeDelta: topRight.latitude - bottomLeft.latitude,
+                longitudeDelta: topRight.longitude - bottomLeft.longitude
+            )
+        )
+    }
+
+    public init(minCorner: Coordinates, maxCorner: Coordinates) {
+        self.init(bottomLeft: minCorner, topRight: maxCorner)
+    }
+
     public func contains(_ location: Coordinates) -> Bool {
         // TODO: This naive version may fail where coordinates wrap around
         (min(topLeft.latitude, bottomRight.latitude)...max(topLeft.latitude, bottomRight.latitude)).contains(location.latitude)
